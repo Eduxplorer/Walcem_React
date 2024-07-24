@@ -7,7 +7,7 @@ import InformationSection from "./components/Information/Information";
 import ImpactSection from "./components/Impact/Impact";
 import AboutSection from "./components/About/About";
 import FAQSection from "./components/FAQ/Faq";
-import Footer from "./components/Footer/Footer";
+import ContactFooter from "./components/Footer/ContactFooter";
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
       <ImpactSection />
       <AboutSection />
       <FAQSection />
-      <Footer />
+      <ContactFooter />
     </div>
   );
 };
