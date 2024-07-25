@@ -1,67 +1,65 @@
+import styled from "styled-components";
 
-import styled from 'styled-components';
-
-const AboutSectionContainer = styled.section`
-  margin: 12.5rem 0;
-  max-width: 120rem;
-`;
-
-const AboutContainer = styled.div`
+const AboutUsSection = styled.section`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  padding: 10rem 1rem;
+  background-color: #fff;
+  background-image: url("img/aboutusilustrationbackground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
-const AboutTitle = styled.h2`
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 1.25rem;
+const Container = styled.div`
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 10rem 0 0;
+  text-align: left;
+  padding: 0 2rem;
 `;
 
-const AboutTextAndIcons = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12.5rem;
+const Title = styled.h2`
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  color: #91bd24;
+  text-shadow: 2px 2px black;
 `;
 
-const AboutIcon = styled.div`
-  flex: 0 0 auto;
-`;
+const Text = styled.p`
+  font-size: 2rem;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px black;
+  text-align: justify;
 
-const AboutTextContent = styled.div`
-  flex: 1;
-  padding: 0 1.25rem;
-
-  p {
-    color: #77b0aa;
-    text-align: center;
-    font-size: 1.5rem;
-    line-height: 1.6;
+  @media (max-width: 768px) {
+    font-size: 1rem;
   }
 `;
 
-const AboutSection = () => {
+const AboutUs = () => {
   return (
-    <AboutSectionContainer id="sobre">
-      <AboutContainer className="sobre-about">
-        <AboutTitle>Sobre Nós</AboutTitle>
-        <AboutTextAndIcons className="sobre-text-and-icons">
-          <AboutIcon className="sobre-icon">
-            <img src="/img/redes.png" alt="redes" />
-          </AboutIcon>
-          <AboutTextContent className="sobre-text-content">
-            <p>
-              Somos uma equipe comprometida com a sustentabilidade e a preservação do meio ambiente através da reciclagem de resíduos eletrônicos.
-            </p>
-          </AboutTextContent>
-          <AboutIcon className="sobre-icon">
-            <img src="/img/redes2.png" alt="redes 2" />
-          </AboutIcon>
-        </AboutTextAndIcons>
-      </AboutContainer>
-    </AboutSectionContainer>
+    <AboutUsSection>
+      <Container>
+        <Title>Sobre Nós</Title>
+        <Text>
+          A Reciclagem Walcem é uma empresa composta por um grupo de estudantes
+          dedicados a resolver o problema de descarte inadequado de resíduos
+          eletrônicos. A iniciativa surgiu em uma aula focada na criação de
+          ideias para ajudar o mundo, onde os alunos pensaram no problema do
+          lixo eletrônico, que, quando descartado de forma inadequada, libera
+          substâncias tóxicas prejudiciais ao meio ambiente e à saúde humana. Em
+          resposta a essa necessidade urgente, os estudantes desenvolveram uma
+          solução digital para promover a reciclagem eficiente e acessível de
+          dispositivos eletrônicos como computadores, celulares e tablets.
+        </Text>
+      </Container>
+    </AboutUsSection>
   );
 };
 
-export default AboutSection;
+export default AboutUs;

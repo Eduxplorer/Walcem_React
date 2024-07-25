@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 const WelcomeSectionContainer = styled.section`
   padding: 1.25rem;
+  background-image: url("img/welcomebackground.png");
 `;
 
 const WelcomeContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 1.25rem 0;
   margin: 12.5rem 0;
@@ -14,20 +14,32 @@ const WelcomeContainer = styled.div`
 
 const TextAndButton = styled.div`
   max-width: 60%;
+  margin: 0 2rem;
+  width: 850px;
+
 
   .text-home {
-    width: 60%;
-    margin: 1.875rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #paragraph-welcome {
+    color: #91BD24;
+    font-size: 2.5rem;
+    opacity: 0.7;
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 4rem;
+    color: #91BD24;
     margin-bottom: 1.25rem;
   }
 
   p {
-    font-size: 1.2rem;
+    font-size: 2rem;
+    color: #fff;
     margin-bottom: 1.25rem;
+    text-align: justify;
   }
 `;
 
@@ -37,8 +49,8 @@ const HomeButton = styled.div`
   button {
     width: 20.125rem;
     height: 4rem;
+    margin-top: 1.25rem;
     padding: 0.625rem 1.25rem;
-    margin: 1.875rem;
     background-color: var(--main-color);
     color: white;
     border: none;
@@ -53,21 +65,13 @@ const HomeButton = styled.div`
   }
 `;
 
-const TreeImage = styled.div`
-  img {
-    height: 32rem;
-    margin-right: 1.875rem;
-  }
-`;
-
-
 const WelcomeSection = () => {
   return (
     <WelcomeSectionContainer>
       <WelcomeContainer>
         <TextAndButton>
           <div className="text-home">
-            <p id="paragraph-welcome">Bem-vindo a</p>
+            <h2 id="paragraph-welcome">Bem-vindo a</h2>
             <h1>Reciclagem Walcem</h1>
           </div>
           <p>
@@ -80,9 +84,6 @@ const WelcomeSection = () => {
             <button>Verificar Coleta</button>
           </HomeButton>
         </TextAndButton>
-        <TreeImage>
-          <img src="/img/arvorehome.png" alt="arvore da home" />
-        </TreeImage>
       </WelcomeContainer>
     </WelcomeSectionContainer>
   );
