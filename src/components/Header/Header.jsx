@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
-import logo from '/img/logo-walcem.png'; 
-import SearchBar from '../SeachBar/SeachBar'; 
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import logo from "/img/logo-walcem.png";
+import SearchBar from "../SeachBar/SeachBar";
 
 // Styled Components
 const StyledHeader = styled.header`
@@ -20,10 +20,10 @@ const StyledHeader = styled.header`
   margin: 0 auto;
 
   &.hidden {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
 `;
 
 const Nav = styled.nav`
@@ -72,10 +72,11 @@ const NavLinks = styled.ul`
     font-weight: bold;
     padding: 10px 15px;
     border-radius: 5px;
-    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease, box-shadow 0.3s ease;
+    transition: background-color var(--transition-duration) ease,
+      color var(--transition-duration) ease, box-shadow 0.3s ease;
 
     &:hover {
-      background: linear-gradient(45deg, #4B7D60, #6FAE89);
+      background: linear-gradient(45deg, #4b7d60, #6fae89);
       color: #fff;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       transform: translateY(-2px);
@@ -89,57 +90,66 @@ const NavLinks = styled.ul`
     transition: color 0.3s ease, transform 0.3s ease;
 
     &:hover {
-      color: #4B7D60;
+      color: #4b7d60;
       transform: translateY(-2px);
     }
   }
 `;
 
-const [isVisible, setIsVisible] = useState(true);
+const Header = () => {
+  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(true);
 
-useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > 50) { // Ajuste o valor conforme necessário
-            setIsVisible(false);
-        } else {
-            setIsVisible(true);
-        }
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > 50) {
+        // Ajuste o valor conforme necessário
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-        window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-}, []);
+  }, []);
 
-    return (
-        <StyledHeader className={isVisible ? '' : 'hidden'}>
-            <Nav>
-                <Logo>
-                    <Link to="/"> {/* Link para a página inicial */}
-                        <img src={logo} alt="Logo WALCEM" />
-                    </Link>
-                </Logo>
-                <NavLinks>
-                    <li>
-                        <Link to="/">Home</Link> {/* Link para a página inicial */}
-                    </li>
-                    <li>
-                        <SearchBar onSearch={handleSearch} /> 
-                    </li>
-                    <li>
-                        <FontAwesomeIcon
-                            icon={faUserCircle}
-                            className="faUserCircle"
-                            onClick={() => navigate('/login')} // Redireciona para a página de login
-                        />
-                    </li>
-                </NavLinks>
-            </Nav>
-        </StyledHeader>
-    );
+  const handleSearch = (query) => {
+    // Lógica de busca aqui
+    console.log("Search query:", query);
+  };
+
+  return (
+    <StyledHeader className={isVisible ? "" : "hidden"}>
+      <Nav>
+        <Logo>
+          <Link to="/">
+            {/* Link para a página inicial */}
+            <img src={logo} alt="Logo WALCEM" />
+          </Link>
+        </Logo>
+        <NavLinks>
+          <li>
+            <Link to="/">Home</Link> {/* Link para a página inicial */}
+          </li>
+          <li>
+            <SearchBar onSearch={handleSearch} />
+          </li>
+          <li>
+            <FontAwesomeIcon
+              icon={faUserCircle}
+              className="faUserCircle"
+              onClick={() => navigate("/login")} // Redireciona para a página de login
+            />
+          </li>
+        </NavLinks>
+      </Nav>
+    </StyledHeader>
+  );
 };
 
 export default Header;
