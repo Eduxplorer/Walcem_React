@@ -173,7 +173,7 @@ import MeuComponente from "./components/MeuComponente";
 - **Mantenha a Estrutura Organizada:** Siga a estrutura de pastas e arquivos conforme descrito para manter o projeto limpo e organizado.
 - **Use Styled-components:** Mantenha os estilos encapsulados nos componentes para facilitar a manutenção.
 - **Teste as Funcionalidades:** Verifique a navegação e o funcionamento dos componentes após qualquer alteração significativa.
-- **Uso do CHAT-GPT:** Caso já tenham código pronto que desejam refatorar, podem simplesmente jogar todo o css html e javascript da página de vocês no chat gpt e mandar ele refatorar o código em um arquivo vite + react com styled-components definido para os estilos no mesmo arquivo, porém o acesso de vocês pode ser limitado então, entendam o processo.
+- **Uso do CHAT-GPT:** Caso já tenham código pronto que desejam refatorar, podem simplesmente jogar todo o css html e javascript da página de vocês no chat gpt, mandar ele dividir em componentes e refatorar o código em um arquivo vite + react com styled-components definido para os estilos no mesmo arquivo, porém o acesso de vocês pode ser limitado então, entendam o processo.
 
 Bom trabalho!
 
