@@ -1,5 +1,4 @@
 
-import Header from '../../components/Header/Header'
 import WelcomeSection from './components/Welcome/Welcome'
 import Mission from './components/Mission/Mission'
 import InformationSection from './components/Information/Information'
@@ -11,7 +10,6 @@ import ContactFooter from './components/Footer/ContactFooter'
 const Home = () => {
   return (
     <div>
-      <Header />
       <WelcomeSection />
       <Mission />
       <InformationSection />
