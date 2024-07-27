@@ -104,7 +104,7 @@ const Mission = () => {
           alt="Saiba como reciclar eletrônicos"
         />
         <Image
-          src="img/saibacomolucrar.jpg"
+          src="img/saibacomolucrar.png"
           alt="Descubra como lucrar com a reciclagem"
         />
       </ImageContainer>

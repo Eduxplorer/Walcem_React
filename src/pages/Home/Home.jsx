@@ -5,8 +5,8 @@ import Mission from './components/Mission/Mission'
 import InformationSection from './components/Information/Information'
 import ImpactSection from './components/Impact/Impact'
 import FAQSection from './components/FAQ/Faq'
-import ContactFooter from '../../components/Footer/ContactFooter'
 import AboutUs from './components/About/About'
+import ContactFooter from './components/Footer/ContactFooter'
 
 const Home = () => {
   return (

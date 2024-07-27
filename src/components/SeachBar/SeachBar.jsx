@@ -46,8 +46,10 @@ const StyledInput = styled.input`
 
 const StyledButton = styled.button`
     padding: 10px 15px;
+    margin: 3px;
     background-color: #164B30;
     border: none;
+    border-radius: 30%;
     cursor: pointer;
     color: #fff;
     transition: background-color 0.3s ease, transform 0.3s ease;

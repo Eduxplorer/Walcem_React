@@ -1,5 +1,8 @@
-// ContactForm.js
 import styled from "styled-components";
+import {
+  FooterLinks as OriginalFooterLinks,
+  FooterLink,
+} from "../../../../components/Footer/Footer";
 
 const Container = styled.div`
   position: relative;
@@ -10,12 +13,12 @@ const Container = styled.div`
 
 const ContactFormWrapper = styled.div`
   background-color: #ffffff;
-  padding: 2rem;
-  margin: 0 50px -250px auto;
+  padding: 3rem;
+  margin: 0 100px -250px auto;
   width: 90%;
   max-width: 400px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 30px;
   text-align: center;
   border: 2px solid black;
   position: relative;
@@ -24,13 +27,13 @@ const ContactFormWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  color: #8d8d99;
+  color: #164b30;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 `;
 
 const Subtitle = styled.p`
-  color: #8d8d99;
+  color: #396e41;
   margin-bottom: 1.5rem;
 `;
 
@@ -39,9 +42,9 @@ const Input = styled.input`
   padding: 0.75rem;
   margin-bottom: 1rem;
   border: 1px solid #e1e1e1;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 0.9rem;
-  background-color: #f9f9fd;
+  background-color: #D9D9D9;
 `;
 
 const Textarea = styled.textarea`
@@ -49,15 +52,15 @@ const Textarea = styled.textarea`
   padding: 0.75rem;
   margin-bottom: 1rem;
   border: 1px solid #e1e1e1;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 0.9rem;
-  background-color: #f9f9fd;
+  background-color: #D9D9D9;
   resize: none;
   height: 100px;
 `;
 
 const Button = styled.button`
-  background-color: #595678;
+  background-color: #6BCB79;
   color: #ffffff;
   padding: 0.75rem 2rem;
   border: none;
@@ -71,26 +74,32 @@ const Button = styled.button`
   }
 `;
 
-const Footer = styled.div`
+const Footer = styled.footer`
   display: flex;
-  background-color: #b0accb;
-  padding: 2rem 0;
+  justify-content: center;
+  background-color: #164b30;
+  padding: 5rem 0;
   margin-top: 100px;
   z-index: 1;
 `;
 
 const FooterContent = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  max-width: 400px;
-  margin-left: 2rem;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 50% 0 2rem;
   color: #ffffff;
+  flex-wrap: wrap;
 `;
 
 const FooterItem = styled.div`
-  margin-bottom: 0.5rem;
-  margin-inline: 100px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+  flex: 1;
+  min-width: 200px;
 `;
 
 const FooterTitle = styled.h3`
@@ -103,9 +112,40 @@ const FooterText = styled.p`
   line-height: 1.4;
 `;
 
+const CustomFooterLinks = styled(OriginalFooterLinks)`
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+  flex: 1;
+  min-width: 100px;
+`;
+
+const ImageAndForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+`;
+
+const PersonImage = styled.div`
+  display: flex;
+  margin-left: 5rem;
+  margin-bottom: -17rem;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100%;
+`;
+
 const ContactFooter = () => {
   return (
     <Container>
+      <ImageAndForm>
+      <PersonImage>
+        <img
+          src="/img/pessoasemreuniao.png"
+          alt="Pessoas em Reunião"
+          />
+          </PersonImage>
       <ContactFormWrapper>
         <Title>Fale Conosco</Title>
         <Subtitle>Queremos ouvir você</Subtitle>
@@ -116,26 +156,28 @@ const ContactFooter = () => {
           <Button type="submit">Enviar mensagem</Button>
         </form>
       </ContactFormWrapper>
+      </ImageAndForm>
       <Footer>
         <FooterContent>
           <FooterItem>
-            <FooterTitle>Visite-nos</FooterTitle>
+            <FooterTitle>Endereço</FooterTitle>
             <FooterText>
-              58 Middle Point Rd
+              Rua Dr. Antônio Bento, 393
               <br />
-              San Francisco, 94124
+              Santo Amaro, São Paulo - SP, 04750-000
             </FooterText>
           </FooterItem>
           <FooterItem>
             <FooterTitle>Contate-nos</FooterTitle>
-            <FooterText>
-              (123) 456 – 789
-              <br />
-              (123) 456 – 789
-              <br />
-              contact@company.com
-            </FooterText>
+            <FooterText>(11) 96278-8593</FooterText>
           </FooterItem>
+          <CustomFooterLinks>
+            <FooterLink to="/privacy-policy">
+              Política de privacidade
+            </FooterLink>
+            <FooterLink to="/support">Suporte</FooterLink>
+            <FooterLink to="/terms">Termos e Condições</FooterLink>
+          </CustomFooterLinks>
         </FooterContent>
       </Footer>
     </Container>
