@@ -12,7 +12,7 @@ import 'animate.css';
 
 function App() {
   return (
-    <div>
+    <><div>
       <Header />
       <ScrollToTop>
         <div className="animate__animated animate__fadeIn">
