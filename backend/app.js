@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'; // Importa o body-parser para processar da
 import cors from 'cors'; // Importa o pacote cors para permitir solicitações de diferentes origens
 import postosColetaRouter from './src/routes/postosColetaRouter.js'; // Importa as rotas para postos de coleta
 import contactRoutes from './src/routes/contactRoutes.js'; // Importa as rotas para suporte
-import infoRouter from './src/routes/infoRouter.js'; // Importa as rotas para informações
+import searchRoutes from './src/routes/searchRoutes.js'; // Importa as rotas para busca
 import geocodificacaoRouter from './src/routes/geocodificacaoRouter.js'; // Importa as rotas para geocodificação
 import commentRoutes from './src/routes/commentRoutes.js'; // Importa as rotas para comentários
 import blogRouter from './src/routes/blogRouter.js'; // Importa as rotas para administração
@@ -25,9 +25,6 @@ app.use('/api/postos-coleta', postosColetaRouter);
 // Define as rotas para a API de suporte
 app.use('/api', contactRoutes);
 
-// Define as rotas para a API de informações
-app.use('/api/info', infoRouter);
-
 // Define as rotas para a API de geocodificação
 app.use('/api/geocodificacao', geocodificacaoRouter);
 
@@ -38,6 +35,9 @@ app.use('/api/comentarios', commentRoutes);
 app.use('/api/blog', blogRouter);
 
 app.use('/api', subscribersRouter);
+
+// Define as rotas para a API de busca
+app.use('/api/search', searchRoutes);
 
 // Exporta a instância do aplicativo para ser utilizada em outros arquivos (como o servidor)
 export default app;

@@ -1,6 +1,8 @@
+
 import styled from 'styled-components';
 import FeaturedPosts from './components/BlogPgPrincipal/FeaturedPosts';
 import Categories from './components/BlogPgPrincipal/Categories';
+import { postsData } from './data/newsData';
 
 // Styled components
 const Main = styled.main`
@@ -37,27 +39,12 @@ const Main = styled.main`
 `;
 
 const Blog = () => {
-    const featuredPostsData = [
-        {
-            image: 'PNRS.png',
-            title: 'PNRS: o que a lei estabelece sobre o descarte de eletrônicos?',
-            description: 'A Política Nacional de Resíduos Sólidos tem uma importância imensa para dar fim a sucateiras.',
-            link: 'post1.html'
-        },
-        {
-            image: 'ISO.png',
-            title: 'ISO 9001 e 14001: quais as obrigatoriedades impostas pelas normas para descarte de resíduos eletrônicos?',
-            description: 'As normas ISO 9001 e 14001 têm um impacto direto nas práticas de gestão de resíduos eletrônicos.',
-            link: 'post2.html'
-        }
-    ];
-
-    return (
-        <Main>
-            <FeaturedPosts posts={featuredPostsData} />
-            <Categories />
-        </Main>
-    );
+  return (
+    <Main>
+      <FeaturedPosts posts={postsData.slice(0, 2)} />
+      <Categories />
+    </Main>
+  );
 };
 
 export default Blog;

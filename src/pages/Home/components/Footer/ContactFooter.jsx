@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import styled from "styled-components";
+import { useState, useCallback } from 'react';
+import styled from 'styled-components';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -198,9 +198,13 @@ const ContactFooter = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
     try {
       const response = await fetch('http://localhost:5000/api/contact', {
         method: 'POST',
@@ -220,8 +224,10 @@ const ContactFooter = () => {
       }
     } catch (error) {
       toast.error('Erro ao enviar a mensagem. Tente novamente.');
+    } finally {
+      setIsSubmitting(false);
     }
-  };
+  }, [name, email, message, isSubmitting]);
 
   return (
     <Container>
@@ -251,7 +257,7 @@ const ContactFooter = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <Button type="submit">Enviar mensagem</Button>
+            <Button type="submit" disabled={isSubmitting}>Enviar mensagem</Button>
           </form>
         </ContactFormWrapper>
       </ImageAndForm>

@@ -1,22 +1,13 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import styled, { keyframes } from 'styled-components';
-import PropTypes from 'prop-types';
+import { postsData } from '../../pages/Blog/data/newsData.jsx'; // Ajuste o caminho conforme necessário
 
 // Styled Components
-const pulse = keyframes`
-    0% {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    50% {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    }
-    100% {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-`;
-
 const StyledSearchBar = styled.div`
     display: flex;
     align-items: center;
@@ -30,7 +21,6 @@ const StyledSearchBar = styled.div`
 
     &:hover {
         background-color: #e0e0e0;
-        animation: ${pulse} 1.5s infinite;
     }
 `;
 
@@ -46,8 +36,7 @@ const StyledInput = styled.input`
 
 const StyledButton = styled.button`
     padding: 10px 15px;
-    margin: 3px;
-    background-color: #164B30;
+    background-color: #164b30;
     border: none;
     border-radius: 30%;
     cursor: pointer;
@@ -55,43 +44,66 @@ const StyledButton = styled.button`
     transition: background-color 0.3s ease, transform 0.3s ease;
 
     &:hover {
-        background-color: var(--primary-color);
+        background-color: #0d2b1d;
         transform: scale(1.1);
-    }
-
-    i {
-        font-size: 16px;
     }
 `;
 
-
 const SearchBar = ({ onSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
 
-    const searchFunction = () => {
-        onSearch(searchQuery); // Passa a consulta de pesquisa para o componente pai
-    };
+    const searchFunction = useCallback(async () => {
+        if (searchQuery.trim() === '') {
+            toast.warning('Por favor, insira um termo de pesquisa.');
+            return;
+        }
 
-    // PropTypes
-    SearchBar.propTypes = {
-        onSearch: PropTypes.func.isRequired,
-    };
-    
+        setIsSearching(true);
+        try {
+            // Simule uma busca local ou faça uma chamada de API
+            const results = postsData.filter(post =>
+                post.title.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+
+            console.log('Search Query:', searchQuery); // Depuração
+            console.log('Results:', results); // Depuração
+
+            if (results.length === 0) {
+                toast.info('Nenhum resultado encontrado.');
+            } else {
+                toast.success('Resultados encontrados!');
+            }
+
+            onSearch(results);
+        } catch (error) {
+            toast.error('Ocorreu um erro durante a busca. Tente novamente.');
+        } finally {
+            setIsSearching(false);
+        }
+    }, [searchQuery, onSearch]);
 
     return (
-        <StyledSearchBar>
-            <StyledInput
-                type="text"
-                id="search-input"
-                placeholder="Pesquisar..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <StyledButton onClick={searchFunction} type="button">
-                <FontAwesomeIcon icon={faSearch} />
-            </StyledButton>
-        </StyledSearchBar>
+        <>
+            <StyledSearchBar>
+                <StyledInput
+                    type="text"
+                    id="search-input"
+                    placeholder="Pesquisar..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <StyledButton onClick={searchFunction} type="button" disabled={isSearching}>
+                    <FontAwesomeIcon icon={faSearch} />
+                </StyledButton>
+            </StyledSearchBar>
+            <ToastContainer />
+        </>
     );
+};
+
+SearchBar.propTypes = {
+    onSearch: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

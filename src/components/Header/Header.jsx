@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import logo from "/img/logo-walcem.png";
-import SearchBar from "../SeachBar/SeachBar";
+import SearchBar from "../SeachBar/SeachBar.jsx";
+import { postsData, categoriesData } from "../../pages/Blog/data/newsData.jsx"; // Ajuste o caminho conforme necessário
 
 // Styled Components
 const StyledHeader = styled.header`
@@ -195,6 +196,10 @@ const Header = () => {
   const navigate = useNavigate();
   const [headerClass, setHeaderClass] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Combine dados para busca
+  const dataToSearch = [...postsData, ...categoriesData]; // Ajuste conforme necessário
 
   useEffect(() => {
     let lastScroll = 0;
@@ -228,18 +233,8 @@ const Header = () => {
     setIsLoggedIn(false);
   };
 
-  const handleSearch = (query) => {
-    const searchTerm = query.toLowerCase();
-    const posts = document.querySelectorAll(".post");
-
-    posts.forEach((post) => {
-      const title = post.getAttribute("data-title").toLowerCase();
-      if (title.includes(searchTerm)) {
-        post.style.display = "block";
-      } else {
-        post.style.display = "none";
-      }
-    });
+  const handleSearch = (results) => {
+    setSearchResults(results); // Atualiza os resultados da busca
   };
 
   return (
@@ -258,7 +253,7 @@ const Header = () => {
             <Link to="/blog">Blog</Link>
           </li>
           <SearchContainer>
-            <SearchBar onSearch={handleSearch} />
+            <SearchBar data={dataToSearch} onSearch={handleSearch} />
           </SearchContainer>
           {!isLoggedIn && (
             <li>
@@ -276,6 +271,17 @@ const Header = () => {
           </li>
         </NavLinks>
       </Nav>
+      <div>
+        {/* Renderizar resultados de busca aqui */}
+        {searchResults.map((result) => (
+          <div key={result.id}>
+            <h2>{result.title}</h2>
+            <p>{result.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: result.imgSrc }} />
+            <div dangerouslySetInnerHTML={{ __html: result.content }} />
+          </div>
+        ))}
+      </div>
     </StyledHeader>
   );
 };

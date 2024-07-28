@@ -1,6 +1,7 @@
+// src/components/BlogPgPrincipal/FeaturedPosts.jsx
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Post from './Post';
-import { postsData } from '../../data/newsData'; // Use postsData se os dados de destaque estiverem aqui
 
 const FeaturedSection = styled.section`
     margin-bottom: 40px;
@@ -25,35 +26,38 @@ const PostsContainer = styled.div`
 `;
 
 const PostItem = styled.div`
-    flex: 1 1 calc(100% - 40px); /* Mobile full width */
+    flex: 1 1 calc(100% - 40px);
     box-sizing: border-box;
     max-width: 100%;
 
     @media (min-width: 768px) {
-        flex: 1 1 calc(50% - 20px); /* 2 items per row */
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
     }
 `;
 
-const FeaturedPosts = () => {
-    const FeaturedToShow = postsData.slice(0, 2); // Use postsData aqui
+const FeaturedPosts = ({ posts }) => (
+    <FeaturedSection>
+        <FeaturedTitle>Postagens em Destaque</FeaturedTitle>
+        <PostsContainer>
+            {posts.map(post => (
+                <PostItem key={post.id}>
+                    <Post {...post} />
+                </PostItem>
+            ))}
+        </PostsContainer>
+    </FeaturedSection>
+);
 
-    return (
-        <FeaturedSection>
-            <FeaturedTitle>Postagens em Destaque</FeaturedTitle>
-            <PostsContainer>
-                {FeaturedToShow.map(post => (
-                    <PostItem key={post.id}>
-                        <Post
-                            imgSrc={post.imgSrc}
-                            title={post.title}
-                            description={post.description}
-                            id={post.id}
-                        />
-                    </PostItem>
-                ))}
-            </PostsContainer>
-        </FeaturedSection>
-    );
+FeaturedPosts.propTypes = {
+    posts: PropTypes.arrayOf(
+        PropTypes.shape({
+            imgSrc: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+        })
+    ).isRequired,
 };
 
 export default FeaturedPosts;

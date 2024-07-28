@@ -3,7 +3,7 @@ export const postsData = [
     id: '1',
     title: 'PNRS: o que a lei estabelece sobre o descarte de eletrônicos?',
     description: 'A Política Nacional de Resíduos Sólidos tem uma importância imensa para dar fim a sucateiras.',
-    imgSrc: '<img src="/img/PNRS.png" alt="PNRS"/>',
+    imgSrc: '/img/PNRS.png', // Corrigido
     views: 120,
     author: 'João Silva',
     category: 'Legislação',
@@ -22,7 +22,7 @@ export const postsData = [
     id: '2',
     title: 'ISO 9001 e 14001',
     description: 'ISO 9001 e 14001: quais as obrigatoriedades impostas pelas normas para o descarte de resíduos eletrônicos?',
-    imgSrc: '<img src="/img/ISO.png" alt="ISO 9001 e 14001"/>',
+    imgSrc: '/img/ISO.png', // Corrigido
     views: 180,
     author: 'Maria Souza',
     category: 'Normas',
@@ -36,15 +36,12 @@ export const postsData = [
       <p>A conformidade com as normas ISO 9001 e 14001 não só ajuda as empresas a melhorar sua eficiência operacional, mas também fortalece sua reputação no mercado, mostrando compromisso com a qualidade e a sustentabilidade.</p>
       <p>Adotar essas normas é um passo importante para qualquer empresa que deseja se destacar em um mercado cada vez mais competitivo e consciente ambientalmente.</p>
     `
-  }
-];
-
-export const categoriesData = [
-  { 
+  },
+  {
     id: '3',
     title: 'Descarte de eletrônicos: descubra 4 categorias de equipamentos que devem ser descartados nas empresas',
     description: 'Entenda quais são os equipamentos eletrônicos que não podem ser descartados no lixo comum.',
-    imgSrc: '<img src="/img/reciclagem-de-eletronicos.jpg" alt="Reciclagem de Eletrônicos"/>',
+    imgSrc: '/img/Descarte.png', // Corrigido
     views: 180,
     author: 'Carlos Lima',
     category: 'Sustentabilidade',
@@ -67,7 +64,7 @@ export const categoriesData = [
     id: '4',
     title: 'Semana do Meio Ambiente 2024',
     description: 'Junte-se a nós na Semana do Meio Ambiente 2024 enquanto exploramos novas formas de preservar nosso planeta.',
-    imgSrc: '<img src="/img/SemanadoAmbiente.png" alt="Semana do Meio Ambiente"/>',
+    imgSrc: '/img/SemanadoAmbiente.png', // Corrigido
     views: 250,
     author: 'Ana Pereira',
     category: 'Eventos',
@@ -86,7 +83,7 @@ export const categoriesData = [
     id: '5',
     title: 'OWL: Livre seu escritório dos resíduos eletrônicos',
     description: 'Saiba como a OWL ajuda a reutilizar resíduos eletrônicos de forma responsável.',
-    imgSrc: '<img src="/img/reciclagem-de-eletronicos.jpg" alt="OWL Reciclagem"/>',
+    imgSrc: '/img/OWL.png', // Corrigido
     views: 300,
     author: 'Bruno Oliveira',
     category: 'Soluções',
@@ -100,5 +97,33 @@ export const categoriesData = [
       <p>Além de reciclar os componentes eletrônicos, a OWL também trabalha com parcerias que permitem a reutilização de materiais em novos produtos. Isso não só reduz o desperdício, mas também cria um ciclo sustentável de uso de recursos.</p>
       <p>Escolha a OWL para gerenciar os resíduos eletrônicos de sua empresa e contribua para um futuro mais verde.</p>
     `
+  },
+  // Novo post adicionado
+  {
+    id: '6',
+    title: 'Reciclagem de Eletrônicos: Dicas para uma Reciclagem Sustentável',
+    description: 'Descubra como reciclar seus eletrônicos de forma sustentável e responsável, ajudando a reduzir o impacto ambiental.',
+    imgSrc: '/img/reciclagem-de-eletronicos.jpg', // Caminho corrigido
+    views: 150, // Valor ajustado conforme necessário
+    author: 'Fernanda Costa',
+    category: 'Sustentabilidade',
+    time: '1 hour ago',
+    content: `
+      <p>Descubra como reciclar seus eletrônicos de forma sustentável e responsável, ajudando a reduzir o impacto ambiental.</p>
+      <p>O descarte correto de eletrônicos é fundamental para a proteção ambiental. Equipamentos eletrônicos contêm diversos componentes que podem causar danos ao meio ambiente se não forem reciclados adequadamente.</p>
+      <p>Aprenda sobre as melhores práticas de reciclagem e descubra como você pode contribuir para um planeta mais limpo e sustentável.</p>
+      <h2>O Que Fazer com Seus Eletrônicos Antigos</h2>
+      <p>Verifique se há programas de devolução ou reciclagem oferecidos por fabricantes ou lojas. Muitos oferecem soluções convenientes para você descartar seus dispositivos antigos de forma responsável.</p>
+      <h2>Cuide dos Seus Resíduos Eletrônicos</h2>
+      <p>Evite jogar eletrônicos no lixo comum. Sempre procure opções de reciclagem especializadas que garantam que os componentes sejam tratados corretamente.</p>
+      <p>Adote práticas sustentáveis e ajude a reduzir o impacto ambiental dos resíduos eletrônicos. Cada ação conta para um futuro mais verde.</p>
+    `
   }
 ];
+
+// Extraia as categorias únicas dos dados das postagens
+export const categoriesData = Array.from(new Set(postsData.map(post => post.category)))
+  .map(category => ({
+    category,
+    posts: postsData.filter(post => post.category === category)
+  }));
