@@ -3,21 +3,24 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
+import CadastroPage from './components/CadastroPage';
 // import About from './pages/About';
 // import Contact from './pages/Contact';
 // import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <div>
+    <><div>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         {/* <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} /> */}
+    <Route path="/contact" element={<Contact />} /> */}
       </Routes>
-    </div>
+    </div> <div className="App">
+        <CadastroPage />
+      </div></>
   );
 }
 
