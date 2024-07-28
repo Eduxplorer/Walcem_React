@@ -17,7 +17,7 @@ function App() {
       <ScrollToTop>
         <div className="animate__animated animate__fadeIn">
           <Routes>
-            <Route path="/Home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/post/:id" element={<BlogPostPage />} />

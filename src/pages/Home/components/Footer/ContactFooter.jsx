@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Componentes estilizados usando styled-components
 const Container = styled.div`
   position: relative;
   display: flex;
