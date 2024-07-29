@@ -1,92 +1,232 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
+import styled from 'styled-components';
+import avatarImg from '/img/avatar.png';
+import editImg from '/img/lapis.png';
+import deleteImg from '/img/lixeira.png';
 
-const CommentsSection = ({ postId }) => {
+const CommentsContainer = styled.div`
+    width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+`;
+
+const CommentForm = styled.div`
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+        flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 1em;
+    outline: none;
+    
+
+  input {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+    width: 500px;
+  }
+`;
+
+const CommentList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const Comment = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: relative;
+`;
+
+const AvatarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  strong {
+    margin-top: 5px;
+  }
+`;
+
+const CommentBody = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
+const CommentHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const CommentContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const CommentFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ActionButtons = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  img {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+  }
+`;
+
+const CommentsSection = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  const [editComment, setEditComment] = useState(null);
-
-  useEffect(() => {
-    // Corrigir a URL da API
-    fetch(`/api/comments/${postId}`)
-      .then(response => response.json())
-      .then(data => setComments(data))
-      .catch(error => console.error('Failed to fetch comments', error));
-  }, [postId]);
+  const [newName, setNewName] = useState('');
 
   const handleAddComment = () => {
-    fetch('/api/comments', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ postId, content: newComment, author: 'User' }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        setComments([...comments, data]);
-        setNewComment('');
-      })
-      .catch(error => console.error('Failed to add comment', error));
+    if (newComment.trim() && newName.trim()) {
+      const publishTime = new Date();
+      const newComments = [
+        ...comments,
+        {
+          id: comments.length + 1,
+          name: newName,
+          text: newComment,
+          time: '0 minutos',
+          publishTime,
+        },
+      ];
+      setComments(newComments);
+      setNewComment('');
+      setNewName('');
+      updateCommentTimes(newComments);
+    } else {
+      alert('Por favor, preencha seu nome e comentário.');
+    }
   };
 
-  const handleUpdateComment = (id, content) => {
-    fetch(`/api/comments/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content }),
-    })
-      .then(response => response.json())
-      .then(updatedComment => {
-        setComments(comments.map(comment => (comment._id === id ? updatedComment : comment)));
-        setEditComment(null);
-      })
-      .catch(error => console.error('Failed to update comment', error));
+  const updateCommentTimes = (comments) => {
+    setInterval(() => {
+      const updatedComments = comments.map((comment) => {
+        const currentTime = new Date();
+        const timeDifference = Math.floor((currentTime - comment.publishTime) / 60000);
+        return { ...comment, time: `${timeDifference} minutos` };
+      });
+      setComments(updatedComments);
+    }, 60000);
+  };
+
+  const handleEditComment = (id) => {
+    const commentToEdit = comments.find((comment) => comment.id === id);
+    setNewComment(commentToEdit.text);
+    setNewName(commentToEdit.name);
+    setComments(comments.filter((comment) => comment.id !== id));
   };
 
   const handleDeleteComment = (id) => {
-    fetch(`/api/comments/${id}`, { method: 'DELETE' })
-      .then(() => setComments(comments.filter(comment => comment._id !== id)))
-      .catch(error => console.error('Failed to delete comment', error));
+    const confirmDelete = window.confirm('Você tem certeza que deseja excluir este comentário?');
+    if (confirmDelete) {
+      setComments(comments.filter((comment) => comment.id !== id));
+    }
   };
 
   return (
-    <div>
+    <CommentsContainer>
       <h2>Comentários</h2>
-      <ul>
-        {comments.map(comment => (
-          <li key={comment._id}>
-            {editComment === comment._id ? (
-              <div>
-                <input
-                  type="text"
-                  value={editComment.content}
-                  onChange={(e) => setEditComment({ ...editComment, content: e.target.value })}
-                />
-                <button onClick={() => handleUpdateComment(comment._id, editComment.content)}>Salvar</button>
-                <button onClick={() => setEditComment(null)}>Cancelar</button>
-              </div>
-            ) : (
-              <div>
-                <p>{comment.content}</p>
-                <button onClick={() => setEditComment({ _id: comment._id, content: comment.content })}>Editar</button>
-                <button onClick={() => handleDeleteComment(comment._id)}>Excluir</button>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
-      <div>
-        <textarea
+      <CommentForm>
+        <input
+          type="text"
+          id="name-input"
+          placeholder="Seu nome"
+          value={newName}
+          onChange={(e) => setNewName(e.target.value)}
+        />
+        <input
+          type="text"
+          id="comment-input"
+          placeholder="Adicione seu comentário"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
-        <button onClick={handleAddComment}>Adicionar Comentário</button>
-      </div>
-    </div>
+        <button id="submit-comment" onClick={handleAddComment}>
+          ENVIAR
+        </button>
+      </CommentForm>
+      <CommentList id="comment-list">
+        {comments.map((comment) => (
+          <Comment key={comment.id}>
+            <AvatarContainer>
+              <img src={avatarImg} alt="Avatar" />
+              <strong>{comment.name}</strong>
+            </AvatarContainer>
+            <CommentBody>
+              <CommentHeader>
+                <CommentContent>{comment.text}</CommentContent>
+              </CommentHeader>
+              <CommentFooter>
+                <small className="text-muted">Publicado há {comment.time}</small>
+              </CommentFooter>
+            </CommentBody>
+            <ActionButtons>
+              <img
+                src={editImg}
+                className="action-icon me-2"
+                alt="Editar"
+                onClick={() => handleEditComment(comment.id)}
+              />
+              <img
+                src={deleteImg}
+                className="action-icon"
+                alt="Excluir"
+                onClick={() => handleDeleteComment(comment.id)}
+              />
+            </ActionButtons>
+          </Comment>
+        ))}
+      </CommentList>
+    </CommentsContainer>
   );
-};
-
-CommentsSection.propTypes = {
-  postId: PropTypes.string.isRequired,
 };
 
 export default CommentsSection;
