@@ -35,6 +35,20 @@ const PostItem = styled.div`
     }
 `;
 
+const CategoriesWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @media (min-width: 768px) {
+        /* Arrange Eventos and Soluções side by side */
+        .eventos,
+        .solucoes {
+            flex: 1 1 calc(50% - 20px);
+        }
+    }
+`;
+
 const Categories = () => {
     // Filtra postagens com id >= 3
     const filteredPosts = postsData.filter(post => parseInt(post.id, 10) >= 3);
@@ -52,23 +66,25 @@ const Categories = () => {
     return (
         <CategoriesSection>
             <CategoriesTitle>Categorias</CategoriesTitle>
-            {categoriesData.map(category => (
-                <div key={category.category}>
-                    <h3>{category.category}</h3>
-                    <PostsContainer>
-                        {category.posts.map(post => (
-                            <PostItem key={post.id}>
-                                <Post
-                                    imgSrc={post.imgSrc}
-                                    title={post.title}
-                                    description={post.description}
-                                    id={post.id}
-                                />
-                            </PostItem>
-                        ))}
-                    </PostsContainer>
-                </div>
-            ))}
+            <CategoriesWrapper>
+                {categoriesData.map(category => (
+                    <div key={category.category} className={category.category.toLowerCase()}>
+                        <h3>{category.category}</h3>
+                        <PostsContainer>
+                            {category.posts.map(post => (
+                                <PostItem key={post.id}>
+                                    <Post
+                                        imgSrc={post.imgSrc}
+                                        title={post.title}
+                                        description={post.description}
+                                        id={post.id}
+                                    />
+                                </PostItem>
+                            ))}
+                        </PostsContainer>
+                    </div>
+                ))}
+            </CategoriesWrapper>
         </CategoriesSection>
     );
 };

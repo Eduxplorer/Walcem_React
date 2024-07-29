@@ -1,18 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import BlogPostPage from './pages/Blog/BlogPostPage.jsx';
-import Blog from './pages/Blog/blog.jsx';
-import PrivacyPolicyPage from './pages/PrivacyPolicy/PrivacyPolicyPage.jsx';
-import ScrollToTop from './components/ScrollToTop/ScrollToTop.jsx';
-import Header from './components/Header/Header.jsx';
-import DefaultFooter from './components/FooterGeral/DefaultFooter.jsx';
-import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton.jsx';
+import BlogPostPage from './pages/Blog/BlogPostPage';
+import Blog from './pages/Blog/blog';
+import PrivacyPolicyPage from './pages/PrivacyPolicy/PrivacyPolicyPage';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import Header from './components/Header/Header';
+import DefaultFooter from './components/FooterGeral/DefaultFooter';
+import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton';
 import 'animate.css';
 
 function App() {
   return (
-    <><div>
+    <>
       <Header />
       <ScrollToTop>
         <div className="animate__animated animate__fadeIn">
@@ -25,9 +25,9 @@ function App() {
           </Routes>
         </div>
       </ScrollToTop>
-      <DefaultFooter /> {/* Exibe apenas HomeFooter */}
+      <DefaultFooter /> {/* Exibe o DefaultFooter */}
       <ScrollToTopButton />
-    </div>
+    </>
   );
 }
 

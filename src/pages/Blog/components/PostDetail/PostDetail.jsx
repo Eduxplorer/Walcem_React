@@ -1,12 +1,13 @@
+
 import { useParams } from 'react-router-dom';
-import { postsData } from '../../data/newsData';
+import { postsData } from '../../data/newsData'; // Ajuste o caminho conforme necessário
 import styled from 'styled-components';
 
 // Styled components
 const Container = styled.div`
-  margin: 2rem auto;
-  max-width: 800px;
-  padding: 0 1rem;
+  margin-top: 0;
+  padding: 2.8rem;
+  width: 100%;
 
   @media (min-width: 768px) {
     margin: 5rem auto;
@@ -19,7 +20,7 @@ const Card = styled.div`
   overflow: hidden;
   background-color: #fff;
   transition: box-shadow 0.3s ease;
-  
+
   &:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
@@ -65,8 +66,6 @@ const MetaSpan = styled.span`
 const PostImage = styled.img`
   width: 100%;
   height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const Content = styled.section`

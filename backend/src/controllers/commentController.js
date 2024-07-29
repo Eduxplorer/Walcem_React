@@ -1,66 +1,39 @@
-import {
-  createComment,
-  getCommentsByPost,
-  getCommentById,
-  updateComment,
-  deleteComment
-} from '../services/commentService.js';
+// controllers/commentController.js
+import Comment from '../models/Comment.js';
 
-// Criar um novo comentário
-export const createCommentController = async (req, res) => {
+export const createComment = async (req, res) => {
   try {
-    const comment = await createComment(req.body);
-    res.status(201).send(comment);
-  } catch (error) {
-    res.status(400).send(error);
+    const newComment = new Comment(req.body);
+    await newComment.save();
+    res.status(201).json(newComment);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };
 
-// Obter comentários por post
-export const getCommentsByPostController = async (req, res) => {
+export const getComments = async (req, res) => {
   try {
-    const comments = await getCommentsByPost(req.params.postId);
-    res.status(200).send(comments);
-  } catch (error) {
-    res.status(400).send(error);
+    const comments = await Comment.find({ postId: req.params.postId });
+    res.json(comments);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };
 
-// Obter comentário por ID
-export const getCommentByIdController = async (req, res) => {
+export const updateComment = async (req, res) => {
   try {
-    const comment = await getCommentById(req.params.id);
-    if (!comment) {
-      return res.status(404).send('Comentário não encontrado');
-    }
-    res.status(200).send(comment);
-  } catch (error) {
-    res.status(400).send(error);
+    const updatedComment = await Comment.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedComment);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };
 
-// Atualizar um comentário por ID
-export const updateCommentController = async (req, res) => {
+export const deleteComment = async (req, res) => {
   try {
-    const comment = await updateComment(req.params.id, req.body);
-    if (!comment) {
-      return res.status(404).send('Comentário não encontrado');
-    }
-    res.status(200).send(comment);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-};
-
-// Deletar um comentário por ID
-export const deleteCommentController = async (req, res) => {
-  try {
-    const comment = await deleteComment(req.params.id);
-    if (!comment) {
-      return res.status(404).send('Comentário não encontrado');
-    }
-    res.status(200).send('Comentário deletado');
-  } catch (error) {
-    res.status(400).send(error);
+    await Comment.findByIdAndDelete(req.params.id);
+    res.status(204).end();
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };

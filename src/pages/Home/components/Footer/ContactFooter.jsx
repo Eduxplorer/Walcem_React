@@ -10,6 +10,7 @@ const Container = styled.div`
   flex-direction: column;
   background-color: #f4f3fa;
   padding: 2rem 0;
+  margin-top: -7rem;
 
   @media (max-width: 1024px) {
     padding: 1.5rem 0;
@@ -230,7 +231,7 @@ const ContactFooter = () => {
   }, [name, email, message, isSubmitting]);
 
   return (
-    <Container>
+    <Container id="support">
       <ToastContainer />
       <ImageAndForm>
         <PersonImage>

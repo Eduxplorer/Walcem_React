@@ -271,9 +271,9 @@ const Footer = () => {
             <FooterContainer>
                 <FooterContent>
                     <FooterLinks>
-                        <Link to="/about">Sobre a WALCEM</Link>
-                        <Link to="/faq">Perguntas frequentes (FAQ)</Link>
-                        <Link to="/support">Suporte</Link>
+                        <Link to="#about">Sobre a WALCEM</Link>
+                        <Link to="#faq">Perguntas frequentes (FAQ)</Link>
+                        <Link to="#missão">Missão</Link>
                         <Link to="/privacy-policy">Política de privacidade</Link>
                     </FooterLinks>
                     <ContactInfo>

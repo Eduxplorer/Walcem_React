@@ -1,4 +1,4 @@
-// src/components/BlogPgPrincipal/FeaturedPosts.jsx
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Post from './Post';
@@ -26,13 +26,13 @@ const PostsContainer = styled.div`
 `;
 
 const PostItem = styled.div`
-    flex: 1 1 calc(100% - 40px);
+    flex: 1 1 calc(100% - 40px); /* Mobile full width */
     box-sizing: border-box;
     max-width: 100%;
 
     @media (min-width: 768px) {
-        flex: 1 1 calc(50% - 20px);
-        max-width: calc(50% - 20px);
+        flex: 1 1 calc(50% - 20px); /* 2 items per row */
+        max-width: calc(50% - 20px); /* Ensure consistent size */
     }
 `;
 
@@ -42,7 +42,12 @@ const FeaturedPosts = ({ posts }) => (
         <PostsContainer>
             {posts.map(post => (
                 <PostItem key={post.id}>
-                    <Post {...post} />
+                    <Post
+                        imgSrc={post.imgSrc}
+                        title={post.title}
+                        description={post.description}
+                        id={post.id}
+                    />
                 </PostItem>
             ))}
         </PostsContainer>

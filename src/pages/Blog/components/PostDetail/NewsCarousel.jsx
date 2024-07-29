@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 const CarouselContainer = styled.div`
   width: 100%;
   margin: auto;
-  padding: 20px; /* Adiciona um padding para melhorar a aparência */
+  padding: 20px;
 `;
 
 const CarouselItem = styled.div`
@@ -61,7 +61,7 @@ const CarouselDescription = styled.p`
 // Função para filtrar notícias únicas
 const getUniqueNews = (data) => {
   const seen = new Set();
-  return data.filter(item => {
+  return data.filter((item) => {
     const duplicate = seen.has(item.id);
     seen.add(item.id);
     return !duplicate;
@@ -69,6 +69,11 @@ const getUniqueNews = (data) => {
 };
 
 const NewsCarousel = ({ posts }) => {
+  if (!Array.isArray(posts)) {
+    console.error('Expected posts to be an array');
+    return null; // Ou retornar uma UI alternativa para erros
+  }
+
   const settings = {
     dots: true,
     infinite: true,
@@ -80,21 +85,21 @@ const NewsCarousel = ({ posts }) => {
     focusOnSelect: true,
     responsive: [
       {
-        breakpoint: 768, // breakpoint para tablets
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 1024, // breakpoint para desktops pequenos
+        breakpoint: 1024,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 1920, // breakpoint para desktops grandes
+        breakpoint: 1920,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,

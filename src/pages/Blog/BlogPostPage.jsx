@@ -1,32 +1,11 @@
 import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PostDetail from './components/PostDetail/PostDetail';
 import NewsCarousel from './components/PostDetail/NewsCarousel';
 import CommentsSection from './components/PostDetail/CommentsSection';
 
-// Styled component for main
 const Main = styled.main`
-  width: 90%;
-  max-width: 1920px;
-  margin: 10% auto;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #90ee90;
-  border-radius: 10px;
-  background-color: #fff;
-  animation: fadeIn 2s ease-out;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   @media (min-width: 1920px) {
     margin: 5% auto;
     padding: 30px;
@@ -59,13 +38,32 @@ const Main = styled.main`
 `;
 
 const BlogPostPage = () => {
-  const { id } = useParams(); // Obtém o id do post da URL
+  const { id: postId } = useParams();
+  
+  // Supondo que você tenha uma função para obter os posts
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // Função para buscar posts
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('/api/posts'); // Atualize a URL conforme necessário
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error('Falha ao buscar postagens', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   return (
     <Main>
-      <PostDetail id={id} />
-      <NewsCarousel />
-      <CommentsSection postId={id} />
+      <PostDetail id={postId} />
+      <NewsCarousel posts={posts} /> {/* Passa a prop posts */}
+      <CommentsSection postId={postId} />
     </Main>
   );
 };

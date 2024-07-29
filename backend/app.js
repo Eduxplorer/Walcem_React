@@ -29,7 +29,7 @@ app.use('/api', contactRoutes);
 app.use('/api/geocodificacao', geocodificacaoRouter);
 
 // Define as rotas para a API de comentários
-app.use('/api/comentarios', commentRoutes);
+app.use('/api', commentRoutes);
 
 // Define as rotas para a API de administração
 app.use('/api/blog', blogRouter);

@@ -55,33 +55,34 @@ const SearchBar = ({ onSearch }) => {
 
     const searchFunction = useCallback(async () => {
         if (searchQuery.trim() === '') {
-            toast.warning('Por favor, insira um termo de pesquisa.');
+            toast.warning('Por favor, insira um termo de pesquisa.', { autoClose: 2000 });
             return;
         }
 
         setIsSearching(true);
         try {
-            // Simule uma busca local ou faça uma chamada de API
+            // Realiza a busca local
             const results = postsData.filter(post =>
                 post.title.toLowerCase().includes(searchQuery.toLowerCase())
             );
 
-            console.log('Search Query:', searchQuery); // Depuração
-            console.log('Results:', results); // Depuração
-
             if (results.length === 0) {
-                toast.info('Nenhum resultado encontrado.');
+                toast.info('Nenhum resultado encontrado.', { autoClose: 2000 });
             } else {
-                toast.success('Resultados encontrados!');
+                // Chama a função onSearch apenas se houver resultados
+                onSearch(results);
             }
-
-            onSearch(results);
         } catch (error) {
-            toast.error('Ocorreu um erro durante a busca. Tente novamente.');
+            toast.error('Ocorreu um erro durante a busca. Tente novamente.', { autoClose: 2000 });
         } finally {
             setIsSearching(false);
         }
     }, [searchQuery, onSearch]);
+
+    const handleSearchClick = (e) => {
+        e.preventDefault();
+        searchFunction();
+    };
 
     return (
         <>
@@ -93,7 +94,7 @@ const SearchBar = ({ onSearch }) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <StyledButton onClick={searchFunction} type="button" disabled={isSearching}>
+                <StyledButton onClick={handleSearchClick} type="button" disabled={isSearching}>
                     <FontAwesomeIcon icon={faSearch} />
                 </StyledButton>
             </StyledSearchBar>

@@ -164,7 +164,7 @@ const Image = styled.img`
 
 const Mission = () => {
   return (
-    <MissionSection>
+    <MissionSection id="missão">
       <TextContainer>
         <Title>Nossa missão</Title>
         <Description>

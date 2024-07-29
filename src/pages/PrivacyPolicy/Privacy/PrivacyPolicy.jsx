@@ -3,9 +3,9 @@ import styled from 'styled-components';
 // Styled components
 const PrivacyPolicySection = styled.section`
   padding: 2rem;
-  width: 60%;
+  width: 50%;
   max-width: 1920px;
-  margin: 5% auto;
+  margin: 10% auto;
   background-color: #f9f9f9;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;

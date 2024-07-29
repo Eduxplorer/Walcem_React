@@ -1,157 +1,92 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useAuth } from '../../../../hooks/useAuth'; // Hook de autenticação
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-// Styled components
-const CommentsContainer = styled.div`
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 1200px; /* Limita a largura máxima */
-    margin: 0 auto; /* Centraliza o container */
-`;
-
-const CommentForm = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-
-    @media (min-width: 768px) {
-        flex-direction: row;
-    }
-`;
-
-const CommentInput = styled.input`
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-`;
-
-const CommentButton = styled.button`
-    padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #0056b3;
-    }
-`;
-
-const CommentsList = styled.div`
-    margin-top: 20px;
-`;
-
-const CommentItem = styled.div`
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    flex-direction: column;
-
-    @media (min-width: 768px) {
-        flex-direction: row;
-    }
-`;
-
-const CommentImage = styled.img`
-    border-radius: 50%;
-    margin-right: 15px;
-    width: 50px;
-    height: 50px;
-`;
-
-const CommentText = styled.div`
-    max-width: 600px;
-`;
-
-const CommentAuthor = styled.h3`
-    margin: 0;
-    font-size: 1.1em;
-`;
-
-const CommentContent = styled.p`
-    margin: 5px 0;
-`;
-
-const CommentDate = styled.span`
-    font-size: 0.9em;
-    color: #666;
-`;
-
-// React component
 const CommentsSection = ({ postId }) => {
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState('');
-    const { user } = useAuth(); // Obtém o usuário autenticado
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
+  const [editComment, setEditComment] = useState(null);
 
-    useEffect(() => {
-        // Carregar os comentários
-        const fetchComments = async () => {
-            const response = await axios.get(`/api/comments/${postId}`);
-            setComments(response.data);
-        };
-        fetchComments();
-    }, [postId]);
+  useEffect(() => {
+    // Corrigir a URL da API
+    fetch(`/api/comments/${postId}`)
+      .then(response => response.json())
+      .then(data => setComments(data))
+      .catch(error => console.error('Failed to fetch comments', error));
+  }, [postId]);
 
-    const handleCommentSubmit = async () => {
-        if (!user) return alert('Você precisa estar logado para comentar.');
+  const handleAddComment = () => {
+    fetch('/api/comments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ postId, content: newComment, author: 'User' }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        setComments([...comments, data]);
+        setNewComment('');
+      })
+      .catch(error => console.error('Failed to add comment', error));
+  };
 
-        try {
-            const response = await axios.post(
-                '/api/comments',
-                { postId, content: newComment },
-                { headers: { Authorization: `Bearer ${user.token}` } }
-            );
-            setComments([...comments, response.data]);
-            setNewComment('');
-        } catch (error) {
-            console.error('Erro ao enviar o comentário:', error);
-        }
-    };
+  const handleUpdateComment = (id, content) => {
+    fetch(`/api/comments/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content }),
+    })
+      .then(response => response.json())
+      .then(updatedComment => {
+        setComments(comments.map(comment => (comment._id === id ? updatedComment : comment)));
+        setEditComment(null);
+      })
+      .catch(error => console.error('Failed to update comment', error));
+  };
 
-    return (
-        <section id="comments">
-            <CommentsContainer>
-                <h2>Comentários</h2>
-                {user ? (
-                    <CommentForm>
-                        <CommentInput
-                            type="text"
-                            placeholder="Adicione seu comentário"
-                            value={newComment}
-                            onChange={(e) => setNewComment(e.target.value)}
-                        />
-                        <CommentButton onClick={handleCommentSubmit}>ENVIAR</CommentButton>
-                    </CommentForm>
-                ) : (
-                    <p>Faça login para comentar.</p>
-                )}
-                <CommentsList>
-                    {comments.map((comment) => (
-                        <CommentItem key={comment._id}>
-                            <CommentImage src="img/homemCmt.png" alt={comment.author} />
-                            <CommentText>
-                                <CommentAuthor>{comment.author}</CommentAuthor>
-                                <CommentContent>{comment.content}</CommentContent>
-                                <CommentDate>Publicado a {new Date(comment.createdAt).toLocaleTimeString()}</CommentDate>
-                            </CommentText>
-                        </CommentItem>
-                    ))}
-                </CommentsList>
-            </CommentsContainer>
-        </section>
-    );
+  const handleDeleteComment = (id) => {
+    fetch(`/api/comments/${id}`, { method: 'DELETE' })
+      .then(() => setComments(comments.filter(comment => comment._id !== id)))
+      .catch(error => console.error('Failed to delete comment', error));
+  };
+
+  return (
+    <div>
+      <h2>Comentários</h2>
+      <ul>
+        {comments.map(comment => (
+          <li key={comment._id}>
+            {editComment === comment._id ? (
+              <div>
+                <input
+                  type="text"
+                  value={editComment.content}
+                  onChange={(e) => setEditComment({ ...editComment, content: e.target.value })}
+                />
+                <button onClick={() => handleUpdateComment(comment._id, editComment.content)}>Salvar</button>
+                <button onClick={() => setEditComment(null)}>Cancelar</button>
+              </div>
+            ) : (
+              <div>
+                <p>{comment.content}</p>
+                <button onClick={() => setEditComment({ _id: comment._id, content: comment.content })}>Editar</button>
+                <button onClick={() => handleDeleteComment(comment._id)}>Excluir</button>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div>
+        <textarea
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <button onClick={handleAddComment}>Adicionar Comentário</button>
+      </div>
+    </div>
+  );
 };
 
 CommentsSection.propTypes = {
-    postId: PropTypes.string.isRequired,
+  postId: PropTypes.string.isRequired,
 };
 
 export default CommentsSection;
