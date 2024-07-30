@@ -1,14 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import BlogPostPage from './pages/Blog/BlogPostPage';
-import Blog from './pages/Blog/blog';
-import PrivacyPolicyPage from './pages/PrivacyPolicy/PrivacyPolicyPage';
-import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import Header from './components/Header/Header';
-import DefaultFooter from './components/FooterGeral/DefaultFooter';
-import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton';
-import 'animate.css';
+import BlogPostPage from "./pages/Blog/BlogPostPage";
+import Blog from "./pages/Blog/blog";
+import PrivacyPolicyPage from "./pages/PrivacyPolicy/PrivacyPolicyPage";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Header from "./components/Header/Header";
+import DefaultFooter from "./components/FooterGeral/DefaultFooter";
+import ScrollToTopButton from "./components/ScrollToTopButton/ScrollToTopButton";
+import "animate.css";
+import LocaisDeColeta from "./pages/LocaisDeColeta/LocaisDeColeta";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/post/:id" element={<BlogPostPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/locais-de-coleta" element={<LocaisDeColeta />} />
           </Routes>
         </div>
       </ScrollToTop>

@@ -21,18 +21,6 @@ const StyledHeader = styled.header`
     }
   }
 
-  @keyframes moveLine {
-    0% {
-      transform: translateX(-100%);
-    }
-    50% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
   background-color: #164b30;
   padding: 1rem 2rem;
   position: fixed;
@@ -55,7 +43,6 @@ const StyledHeader = styled.header`
     height: 2px;
     background: #32cd32;
     transform: translateX(-100%);
-    animation: moveLine 2s linear infinite;
   }
 
   &.hidden {

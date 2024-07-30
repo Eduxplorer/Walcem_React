@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 const WhyRecycleSection = styled.section`
-margin-top: -6rem;
-  position: relative;
   background-image: url("/img/porquereciclarbackground.png");
-  background-size: contain;
-  background-position: center;
+  background-size: contain; /* Mantém a proporção da imagem */
   background-repeat: no-repeat;
-  padding: 10rem 0;
   color: white;
-  min-height: 100vh; /* Garante altura mínima */
+  max-width: 1920px;
+  height: 700px;
+  display: flex; /* Use flex para alinhar o conteúdo */
+  justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  padding: 0 2rem; /* Adiciona padding nas laterais */
+  background-color: #164b30;
 
   @media (max-width: 1024px) {
     padding: 8rem 0;
@@ -30,31 +32,27 @@ margin-top: -6rem;
 const ContentContainer = styled.div`
   max-width: 100%;
   display: flex;
+  max-width: 30%;
+  padding-right: 2rem; /* Espaçamento à direita do texto */
   flex-direction: column;
-  align-items: flex-start;
-  max-width: 100%;
-  padding-left: 2rem;
-
   @media (max-width: 1024px) {
     max-width: 80%;
-    padding-left: 4%;
+    padding-right: 4%;
   }
 
   @media (max-width: 768px) {
     max-width: 95%;
-    padding-left: 3%;
+    padding-right: 3%;
   }
 
   @media (max-width: 480px) {
-    padding-left: 2%;
+    padding-right: 2%;
   }
 `;
 
 const TextContent = styled.div`
-  max-width: 40%;
-  margin-top: 20%
   text-align: justify;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   line-height: 1.6;
 
   @media (max-width: 1024px) {

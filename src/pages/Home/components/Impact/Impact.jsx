@@ -5,7 +5,8 @@ const ImpactSectionContainer = styled.section`
   padding: 3rem 0;
   color: #77b0aa;
   margin-top: -6rem; /* Ajuste do margin-top */
-  width: 100%; 
+  width: 100%;
+  margin: 100px 0;
 
   @media (max-width: 1024px) {
     padding: 8rem 0;
@@ -99,7 +100,7 @@ const ImagesColumn = styled.div`
   flex-direction: column;
   align-items: flex-end; /* Alinhar imagens à direita */
   margin-left: 2rem; /* Mover para a direita */
-  gap: 20rem; /* Espaçamento entre as imagens */
+  gap: 5rem; /* Espaçamento entre as imagens */
 
   @media (max-width: 1024px) {
     align-items: center;
@@ -135,11 +136,9 @@ const ImpactText = styled.div`
 `;
 
 const ImpactImage = styled.div`
-  margin-top: 1.5rem; /* Ajuste de margem superior para alinhar verticalmente */
-
   img {
     max-width: 100%;
-    height: 10rem ;
+    height: 15rem;
 
     @media (max-width: 1024px) {
       max-width: 10rem;
@@ -153,10 +152,6 @@ const ImpactImage = styled.div`
       max-width: 6rem;
     }
   }
-  &:nth-child(1) {
-    margin-top: 10rem;
-  }
-
   &:nth-child(2) {
     margin-top: 1rem; /* Reduzida a margem superior */
   }

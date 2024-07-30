@@ -6,7 +6,6 @@ const FAQSectionContainer = styled.section`
   text-align: center;
   background-color: #f4f3fa;
   padding: 2rem;
-  margin-top: -1rem;
   width: 100%;
 `;
 
@@ -202,5 +201,3 @@ const FAQSection = () => {
 };
 
 export default FAQSection;
-
-

@@ -1,4 +1,4 @@
-import PrivacyPolicy from './Privacy/PrivacyPolicy';
+import PrivacyPolicy from "./Privacy/PrivacyPolicy";
 
 const PrivacyPolicyPage = () => {
   return (

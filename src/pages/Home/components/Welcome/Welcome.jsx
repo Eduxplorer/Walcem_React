@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // Animação de pulse
 const pulse = keyframes`
@@ -19,14 +20,12 @@ const WelcomeSectionContainer = styled.section`
   background-position: top;
   background-repeat: no-repeat;
   max-width: 100%;
-  height: 60rem;
+  height: 82vh;
   align-items: center;
   background-size: contain;
 
-
-
   @media (max-width: 1440px) {
-    padding: 0.75rem; 
+    padding: 0.75rem;
     padding-top: calc(0.75rem + 8rem);
   }
 
@@ -51,7 +50,7 @@ const WelcomeContainer = styled.div`
   align-items: flex-start;
   padding: 1.25rem 0;
   margin: 0;
- max-width: 100%;
+  max-width: 80%;
 `;
 
 const TextAndButton = styled.div`
@@ -181,6 +180,12 @@ const HomeButton = styled.div`
 `;
 
 const WelcomeSection = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate("/locais-de-coleta");
+  };
+
   return (
     <WelcomeSectionContainer>
       <WelcomeContainer>
@@ -196,7 +201,7 @@ const WelcomeSection = () => {
             componentes eletrônicos.
           </p>
           <HomeButton>
-            <button>Verificar Coleta</button>
+            <button onClick={handleButtonClick}>Verificar Coleta</button>
           </HomeButton>
         </TextAndButton>
       </WelcomeContainer>
