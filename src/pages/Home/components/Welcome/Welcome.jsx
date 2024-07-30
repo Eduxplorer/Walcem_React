@@ -14,21 +14,19 @@ const pulse = keyframes`
 `;
 
 const WelcomeSectionContainer = styled.section`
-  padding: 1.25rem;
-  padding-top: calc(1.25rem + 8rem);
+  display: flex;
   background-image: url("img/welcomebackground.png");
-  background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  max-width: 100%;
+  height: 60rem;
+  align-items: center;
+  background-size: contain;
 
-  @media (max-width: 1920px) {
-    padding: 1rem;
-    padding-top: calc(1rem + 8rem);
-  }
+
 
   @media (max-width: 1440px) {
-    padding: 0.75rem;
+    padding: 0.75rem; 
     padding-top: calc(0.75rem + 8rem);
   }
 
@@ -53,7 +51,7 @@ const WelcomeContainer = styled.div`
   align-items: flex-start;
   padding: 1.25rem 0;
   margin: 0;
-  height: 100%;
+ max-width: 100%;
 `;
 
 const TextAndButton = styled.div`
@@ -86,9 +84,8 @@ const TextAndButton = styled.div`
 
   #paragraph-welcome {
     color: #91bd24;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     opacity: 0.7;
-    margin-bottom: 0.5rem;
 
     @media (max-width: 1366px) {
       font-size: 1.6rem;
@@ -104,7 +101,7 @@ const TextAndButton = styled.div`
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 4rem;
     color: #91bd24;
     margin-bottom: 0.5rem;
 
@@ -122,10 +119,11 @@ const TextAndButton = styled.div`
   }
 
   p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: #fff;
     margin-bottom: 1rem;
     text-align: justify;
+    letter-spacing: -0.05em;
 
     @media (max-width: 1366px) {
       font-size: 1rem;
