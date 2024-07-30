@@ -20,7 +20,7 @@ const MissionSection = styled.section`
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  background-color: #f7edcc;
+  background-color: #f8f3e0;
   text-align: center;
   margin-top: -4rem; /* Ajuste para ficar mais perto da seção de boas-vindas */
 
