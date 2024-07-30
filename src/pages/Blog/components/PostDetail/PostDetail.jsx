@@ -9,11 +9,7 @@ const Container = styled.div`
   padding: 2.8rem;
   width: 100%;
 
-  @media (min-width: 768px) {
-    margin: 5rem auto;
-  }
 `;
-
 const Card = styled.div`
   border: 2px solid #e0e0e0;
   border-radius: 12px;
@@ -57,6 +53,7 @@ const MetaSeparator = styled.div`
   align-items: center;
   font-size: 0.9em;
   color: #666666;
+  margin: 10px;
 `;
 
 const MetaSpan = styled.span`
@@ -66,6 +63,7 @@ const MetaSpan = styled.span`
 const PostImage = styled.img`
   width: 100%;
   height: auto;
+  padding: 60px;
 `;
 
 const Content = styled.section`

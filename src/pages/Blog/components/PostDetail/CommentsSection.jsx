@@ -6,6 +6,7 @@ import deleteImg from '/img/lixeira.png';
 
 const CommentsContainer = styled.div`
     width: 90%;
+    max-width: 800px;
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
@@ -15,37 +16,33 @@ const CommentsContainer = styled.div`
 
 const CommentForm = styled.div`
     display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
-        flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    font-size: 1em;
-    outline: none;
-    
 
-  input {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 8px;
+    input, button {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
 
-  }
+    input {
+        background-color: #f0f0f0;
+    }
 
-  button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    font-size: 1em;
-    cursor: pointer;
-    outline: none;
-    width: 500px;
-  }
+    button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #218838;
+        }
+    }
 `;
 
 const CommentList = styled.div`
@@ -230,3 +227,4 @@ const CommentsSection = () => {
 };
 
 export default CommentsSection;
+

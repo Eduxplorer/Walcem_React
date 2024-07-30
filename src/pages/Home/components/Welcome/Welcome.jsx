@@ -22,7 +22,7 @@ const WelcomeSectionContainer = styled.section`
   max-width: 100%;
   height: 82vh;
   align-items: center;
-  background-size: contain;
+  background-size: cover;
 
   @media (max-width: 1440px) {
     padding: 0.75rem;

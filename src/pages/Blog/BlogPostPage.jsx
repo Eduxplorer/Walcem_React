@@ -12,7 +12,6 @@ const Main = styled.main`
   }
 
   @media (max-width: 1920px) {
-    margin: 10% auto;
     padding: 20px;
   }
 

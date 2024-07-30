@@ -7,7 +7,7 @@ const apiKey = process.env.HERE_API_KEY; // variável definida no arquivo .env
 export const obterCoordenadas = async (cep) => {
   // Monta a URL para a API de geocodificação usando o CEP
   const url = `https://geocode.search.hereapi.com/v1/geocode?q=Invalidenstr+117+Berlin&apiKey=rz_gQy01iF7cAjSKRbHNYBC1navluPByiFTVxV5Bxmg`;
-  
+
   try {
     const response = await axios.get(url);
     const data = response.data;
@@ -28,7 +28,7 @@ export const obterCoordenadas = async (cep) => {
 export const obterRota = async (origem, destino) => {
   // Monta a URL para a API de roteamento usando as coordenadas de origem e destino
   const url = `https://router.hereapi.com/v8/routes?transportMode=car&origin=52.5308,13.3847&destination=52.5264,13.3686&return=summary&apikey=rz_gQy01iF7cAjSKRbHNYBC1navluPByiFTVxV5Bxmg`;
-  
+
   try {
     const response = await axios.get(url);
     const data = response.data;

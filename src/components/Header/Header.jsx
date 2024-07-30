@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "/img/logo-walcem.png";
-import SearchBar from '../SeachBar/SeachBar';
+// import SearchBar from '../SeachBar/SeachBar';
 
 // Styled Components
 const StyledHeader = styled.header`
@@ -168,12 +168,12 @@ const Header = () => {
     };
   }, []);
 
-  const handleSearch = (results) => {
-    // Lógica para redirecionar para a página de resultados
-    // Dependendo da sua estrutura, você pode redirecionar para uma página de resultados ou exibir resultados na mesma página
-    // Exemplo: navigate(`/search?query=${encodeURIComponent(query)}`);
-    console.log(results); // Apenas um exemplo
-  };
+  // const handleSearch = (results) => {
+  //   // Lógica para redirecionar para a página de resultados
+  //   // Dependendo da sua estrutura, você pode redirecionar para uma página de resultados ou exibir resultados na mesma página
+  //   // Exemplo: navigate(`/search?query=${encodeURIComponent(query)}`);
+  //   console.log(results); // Apenas um exemplo
+  // };
 
   return (
     <StyledHeader className={headerClass}>
@@ -199,9 +199,9 @@ const Header = () => {
               Login
             </Link>
           </li>
-          <li>
+          {/* <li>
             <SearchBar onSearch={handleSearch} />
-          </li>
+          </li> */}
         </NavLinks>
       </Nav>
     </StyledHeader>
