@@ -83,7 +83,7 @@ export const postsData = [
     id: '5',
     title: 'OWL: Livre seu escritório dos resíduos eletrônicos',
     description: 'Saiba como a OWL ajuda a reutilizar resíduos eletrônicos de forma responsável.',
-    imgSrc: '/img/OWL.png', // Corrigido
+    imgSrc: '/img/owl.jpg', // Corrigido
     views: 300,
     author: 'Bruno Oliveira',
     category: 'Soluções',

@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { postsData } from '../../pages/Blog/data/newsData.jsx'; // Ajuste o caminho conforme necessário
+import { postsData } from '../../pages/Blog/data/newsData'; // Corrija o caminho conforme necessário
 
 // Styled Components
 const StyledSearchBar = styled.div`
@@ -53,7 +53,7 @@ const SearchBar = ({ onSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearching, setIsSearching] = useState(false);
 
-    const searchFunction = useCallback(async () => {
+    const searchFunction = useCallback(() => {
         if (searchQuery.trim() === '') {
             toast.warning('Por favor, insira um termo de pesquisa.', { autoClose: 2000 });
             return;
@@ -69,8 +69,9 @@ const SearchBar = ({ onSearch }) => {
             if (results.length === 0) {
                 toast.info('Nenhum resultado encontrado.', { autoClose: 2000 });
             } else {
-                // Chama a função onSearch apenas se houver resultados
+                // Passa os resultados para o componente pai
                 onSearch(results);
+                setSearchQuery(''); // Limpa o campo de busca
             }
         } catch (error) {
             toast.error('Ocorreu um erro durante a busca. Tente novamente.', { autoClose: 2000 });

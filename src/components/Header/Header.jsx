@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import logo from "/img/logo-walcem.png";
-import SearchBar from "../SeachBar/SeachBar.jsx";
-import { postsData, categoriesData } from "../../pages/Blog/data/newsData.jsx"; // Ajuste o caminho conforme necessário
+import SearchBar from '../SeachBar/SeachBar';
 
 // Styled Components
 const StyledHeader = styled.header`
@@ -142,27 +139,10 @@ const NavLinks = styled.ul`
     }
   }
 
-  .faUserCircle {
-    font-size: 2rem;
-    color: #ffffff;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.3s ease;
-    margin-left: 1rem; /* Adjust this value as needed */
-
-    &:hover {
-      color: #4b7d60;
-      transform: translateY(-2px);
-    }
-  }
-
   @media (max-width: 1024px) {
     li a {
       font-size: 0.875rem;
       padding: 0.5rem;
-    }
-
-    .faUserCircle {
-      font-size: 1.5rem;
     }
   }
 
@@ -175,31 +155,9 @@ const NavLinks = styled.ul`
   }
 `;
 
-const SearchContainer = styled.li`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  max-width: 400px;
-  margin-left: 1rem; /* Add margin to separate from the login icon */
-
-  @media (max-width: 1024px) {
-    max-width: 300px;
-  }
-
-  @media (max-width: 768px) {
-    max-width: 250px;
-    margin-bottom: 1rem;
-  }
-`;
-
 const Header = () => {
   const navigate = useNavigate();
   const [headerClass, setHeaderClass] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
-  const [searchResults, setSearchResults] = useState([]);
-
-  // Combine dados para busca
-  const dataToSearch = [...postsData, ...categoriesData]; // Ajuste conforme necessário
 
   useEffect(() => {
     let lastScroll = 0;
@@ -223,18 +181,11 @@ const Header = () => {
     };
   }, []);
 
-  // Mock login function (replace with actual login logic)
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  // Mock logout function (replace with actual logout logic)
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   const handleSearch = (results) => {
-    setSearchResults(results); // Atualiza os resultados da busca
+    // Lógica para redirecionar para a página de resultados
+    // Dependendo da sua estrutura, você pode redirecionar para uma página de resultados ou exibir resultados na mesma página
+    // Exemplo: navigate(`/search?query=${encodeURIComponent(query)}`);
+    console.log(results); // Apenas um exemplo
   };
 
   return (
@@ -247,41 +198,25 @@ const Header = () => {
         </Logo>
         <NavLinks>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={() => navigate("/")}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/blog">Blog</Link>
+            <Link to="/blog" onClick={() => navigate("/blog")}>
+              Blog
+            </Link>
           </li>
-          <SearchContainer>
-            <SearchBar data={dataToSearch} onSearch={handleSearch} />
-          </SearchContainer>
-          {!isLoggedIn && (
-            <li>
-              <Link to="/login" onClick={handleLogin}>
-                Login
-              </Link>
-            </li>
-          )}
           <li>
-            <FontAwesomeIcon
-              icon={faUserCircle}
-              className="faUserCircle"
-              onClick={isLoggedIn ? handleLogout : () => navigate("/login")}
-            />
+          <Link to="/maintenance" onClick={() => console.log('Navigating to maintenance')}>
+              Login
+            </Link>
+          </li>
+          <li>
+            <SearchBar onSearch={handleSearch} />
           </li>
         </NavLinks>
       </Nav>
-      <div>
-        {/* Renderizar resultados de busca aqui */}
-        {searchResults.map((result) => (
-          <div key={result.id}>
-            <h2>{result.title}</h2>
-            <p>{result.description}</p>
-            <div dangerouslySetInnerHTML={{ __html: result.imgSrc }} />
-            <div dangerouslySetInnerHTML={{ __html: result.content }} />
-          </div>
-        ))}
-      </div>
     </StyledHeader>
   );
 };

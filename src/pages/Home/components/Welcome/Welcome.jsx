@@ -141,7 +141,7 @@ const TextAndButton = styled.div`
   }
 `;
 
-const HomeButton = styled.div`
+const HomeLink = styled.div`
   margin-top: 1rem;
 
   button {
@@ -197,9 +197,9 @@ const WelcomeSection = () => {
             além de oferecer informações detalhadas sobre dispositivos e
             componentes eletrônicos.
           </p>
-          <HomeButton>
+          <HomeLink>
             <button>Verificar Coleta</button>
-          </HomeButton>
+          </HomeLink>
         </TextAndButton>
       </WelcomeContainer>
     </WelcomeSectionContainer>

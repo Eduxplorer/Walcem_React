@@ -9,6 +9,7 @@ import Header from './components/Header/Header';
 import DefaultFooter from './components/FooterGeral/DefaultFooter';
 import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton';
 import 'animate.css';
+import MaintenancePage from './components/MaintenancePage'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/post/:id" element={<BlogPostPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/maintenance" element={<MaintenancePage />} />
           </Routes>
         </div>
       </ScrollToTop>
