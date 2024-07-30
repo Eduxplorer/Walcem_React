@@ -1,4 +1,3 @@
-
 import { useParams } from 'react-router-dom';
 import { postsData } from '../../data/newsData'; // Ajuste o caminho conforme necessário
 import styled from 'styled-components';
@@ -8,8 +7,8 @@ const Container = styled.div`
   margin-top: 0;
   padding: 2.8rem;
   width: 100%;
-
 `;
+
 const Card = styled.div`
   border: 2px solid #e0e0e0;
   border-radius: 12px;
@@ -62,8 +61,12 @@ const MetaSpan = styled.span`
 
 const PostImage = styled.img`
   width: 100%;
+  max-width: 800px;
   height: auto;
-  padding: 60px;
+  margin: 0 auto;
+  display: block;
+  padding: 20px;
+  object-fit: cover;
 `;
 
 const Content = styled.section`
@@ -110,3 +113,4 @@ const PostDetail = () => {
 };
 
 export default PostDetail;
+
