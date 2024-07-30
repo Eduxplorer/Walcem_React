@@ -138,7 +138,7 @@ const TextAndButton = styled.div`
   }
 `;
 
-const HomeLink = styled.div`
+const HomeButton = styled.div`
   margin-top: 1rem;
 
   button {
