@@ -10,6 +10,7 @@ import DefaultFooter from "./components/FooterGeral/DefaultFooter";
 import ScrollToTopButton from "./components/ScrollToTopButton/ScrollToTopButton";
 import "animate.css";
 import LocaisDeColeta from "./pages/LocaisDeColeta/LocaisDeColeta";
+import MaintenancePage from './components/MaintenancePage'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/post/:id" element={<BlogPostPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/locais-de-coleta" element={<LocaisDeColeta />} />
+            <Route path="/maintenance" element={<MaintenancePage />} />
           </Routes>
         </div>
       </ScrollToTop>

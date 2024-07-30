@@ -5,6 +5,7 @@ const ContainerWrapper = styled.div`
   display: flex;
   width: 100%;
   max-width: 1200px;
+  margin-top:10rem;
   margin: 0 auto;
   height: 500px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
