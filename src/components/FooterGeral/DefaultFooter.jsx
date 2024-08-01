@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookSquare, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
@@ -153,60 +151,6 @@ const Newsletter = styled.div`
     }
 `;
 
-// Define as redes sociais
-const SocialMedia = styled.div`
-    display: flex;
-    flex-direction: inline; /* Alinha o título acima dos ícones */
-    justify-content: flex-start;
-    width: 45%;
-    flex-wrap: wrap;
-    margin: 0;
-    gap: 12px;
-    
-
-    @media (max-width: 768px) {
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-`;
-
-// Define o título das redes sociais
-const SocialMediaTitle = styled.h2`
-    width: 100%;
-    color: #000;
-    margin-bottom: -2rem; /* Reduzido de 10px para 5px */
-    text-align: left;
-    padding: 0;
-
-    @media (max-width: 768px) {
-        text-align: center;
-    }
-`;
-
-// Define o link de uma rede social
-const SocialMediaLink = styled.a`
-    margin: 5px; /* Reduz o espaçamento entre os ícones */
-    font-size: 32px;
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease;
-
-    &:hover {
-        color: #006400;
-        transform: translateY(-5px);
-    }
-
-    @media (max-width: 768px) {
-        font-size: 28px;
-        margin: 4px; /* Ajusta o espaçamento para telas menores */
-    }
-
-    @media (max-width: 480px) {
-        font-size: 24px;
-        margin: 3px; /* Ajusta o espaçamento para telas menores */
-    }
-`;
 
 // Define o copyright
 const Copyright = styled.div`
@@ -282,21 +226,6 @@ const Footer = () => {
                         <ContactText>Telefone: (11) 3737-3900</ContactText>
                         <ContactText>Email: contato@walcem.com.br</ContactText>
                     </ContactInfo>
-                    <SocialMedia>
-                        <SocialMediaTitle>Redes sociais</SocialMediaTitle>
-                        <SocialMediaLink href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faFacebookSquare} />
-                        </SocialMediaLink>
-                        <SocialMediaLink href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faLinkedin} />
-                        </SocialMediaLink>
-                        <SocialMediaLink href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faInstagram} />
-                        </SocialMediaLink>
-                        <SocialMediaLink href="https://x.com/" target="_blank" rel="noopener noreferrer">
-                            𝕏
-                        </SocialMediaLink>
-                    </SocialMedia>
                 </FooterContent>
                 <Newsletter>
                     <form onSubmit={handleSubmit}>

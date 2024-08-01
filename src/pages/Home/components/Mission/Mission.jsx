@@ -34,12 +34,14 @@ const MissionSection = styled.section`
 
   @media (min-width: 1024px) {
     padding: 8rem 4rem;
+    flex-direction: column;
   }
 
   @media (min-width: 768px) {
-    flex-direction: row;
+    flex-direction: column;
+
     text-align: left;
-    padding: 6rem 2rem;
+    padding: 3rem 2rem;
   }
 `;
 

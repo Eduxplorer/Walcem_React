@@ -37,11 +37,15 @@ const WelcomeSectionContainer = styled.section`
   @media (max-width: 1024px) {
     padding: 0.5rem;
     padding-top: calc(0.5rem + 8rem);
+    background-size: contain;
+    height: 45vh;
+    align-items: flex-start;
   }
 
   @media (max-width: 768px) {
     padding: 0.25rem;
     padding-top: calc(0.25rem + 8rem);
+
   }
 `;
 
@@ -129,7 +133,9 @@ const TextAndButton = styled.div`
     }
 
     @media (max-width: 1024px) {
-      font-size: 0.9rem;
+      font-size: 1.2rem;
+      letter-spacing: -0.06em;
+      margin-bottom: 0;
     }
 
     @media (max-width: 768px) {
@@ -169,6 +175,7 @@ const HomeButton = styled.div`
       width: 14rem;
       height: 3rem;
       font-size: 1.1rem;
+      margin-top: 0;
     }
 
     @media (max-width: 768px) {

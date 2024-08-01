@@ -22,6 +22,11 @@ export const GlobalStyle = createGlobalStyle`
     --transition-duration: 0.3s;
   }
 
+  body, html {
+  overflow-x: hidden;
+}
+
+
   * {
     margin: 0;
     padding: 0;
